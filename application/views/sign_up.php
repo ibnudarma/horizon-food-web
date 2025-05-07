@@ -50,37 +50,40 @@
                   </div>
                 </div>
               </div>
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" />
-                <label for="email">Email Address</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="password" name="password" placeholder="Email Address / Username" />
-                <label for="password">Password</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="confirm_password" name="confirm_password" placeholder="Email Address / Username" />
-                <label for="confirm_password">Konfirmasi Password</label>
-              </div>
-              <div class="form-floating mb-3">
-                <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                  <option selected>Pilih jenis akun</option>
-                  <option value="1">Pembeli</option>
-                  <option value="2">Penjual</option>
-                </select>
-                <label for="floatingSelect">Daftar akun sebagai</label>
-              </div>
-              <div class="d-flex mt-1 justify-content-between">
-                <div class="form-check">
-                  <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-                  <label class="form-check-label text-muted" for="customCheckc1">Saya setuju untuk daftar</label>
+              <form action="<?= base_url('app/sign_up') ?>" method="post">
+
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" />
+                  <label for="email">Email Address</label>
                 </div>
-              </div>
-              <div class="d-grid mt-4">
-                <button type="button" class="btn btn-secondary p-2">Sign Up</button>
-              </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="password" name="password" placeholder="Email Address / Username" />
+                  <label for="password">Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="text" class="form-control" id="confirm_password" name="confirm_password" placeholder="Email Address / Username" />
+                  <label for="confirm_password">Konfirmasi Password</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+                    <option selected>Pilih jenis akun</option>
+                    <option value="1">Pembeli</option>
+                    <option value="2">Penjual</option>
+                  </select>
+                  <label for="floatingSelect">Daftar akun sebagai</label>
+                </div>
+                <div class="d-flex mt-1 justify-content-between">
+                  <div class="form-check">
+                    <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+                    <label class="form-check-label text-muted" for="customCheckc1">Saya setuju untuk daftar</label>
+                  </div>
+                </div>
+                <div class="d-grid mt-4">
+                  <button type="submit" class="btn btn-secondary p-2">Sign Up</button>
+                </div>
+              </form>
               <hr />
-              <h5 class="d-flex justify-content-center">Sudah punya akun?<a href="<?= base_url('/') ?>" class="ms-1">Masuk</a></h5>
+              <h5 class="d-flex justify-content-center">Sudah punya akun?<a href="<?= base_url('app/sign_in') ?>" class="ms-1">Masuk</a></h5>
             </div>
           </div>
         </div>

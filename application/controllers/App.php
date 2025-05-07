@@ -8,13 +8,28 @@ class App extends CI_Controller {
         parent::__construct();
     }
 
-    public function index() 
+    public function index()
+    {
+        $this->load->view('welcome');
+    }
+
+    public function sign_in() 
     {
         $this->load->view('sign_in');
     }
 
     public function sign_up()
     {
-        $this->load->view('sign_up');
+        if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+
+            $this->load->view('sign_up');
+            
+        } elseif ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            
+            if ($this->form_validation->run() == FALSE) {
+                $this->load->view('sign_up');
+            }
+        }
     }
+    
 }

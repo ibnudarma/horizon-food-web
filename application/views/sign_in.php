@@ -40,7 +40,19 @@
         <div class="auth-form">
           <div class="card mt-5">
             <div class="card-body">
-              <a href="#" class="d-flex justify-content-center mt-3">
+              <!-- Notifikasi -->
+              <?php if ($this->session->flashdata('success')): ?>
+              <div class="alert alert-success text-center">
+                  <?php echo $this->session->flashdata('success'); ?>
+                  </div>
+              <?php endif; ?>
+              <?php if ($this->session->flashdata('error')): ?>
+                  <div class="alert alert-danger text-center">
+                      <?php echo $this->session->flashdata('error'); ?>
+                  </div>
+              <?php endif; ?>
+              <!-- End Notifikasi -->
+              <a href="<?= base_url('/') ?>" class="d-flex justify-content-center mt-3">
                 <img src="<?= base_url('assets/images/logo-dark.svg') ?>" alt="image" class="img-fluid brand-logo" />
               </a>
               <div class="row">
@@ -50,24 +62,27 @@
                   </div>
                 </div>
               </div>
-              <div class="form-floating mb-3">
-                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" />
-                <label for="email">Email Address</label>
-              </div>
-              <div class="form-floating mb-3">
-                <input type="text" class="form-control" id="password" name="password" placeholder="Email Address / Username" />
-                <label for="password">Password</label>
-              </div>
-              <div class="d-flex mt-1 justify-content-between">
-                <div class="form-check">
-                  <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
-                  <label class="form-check-label text-muted" for="customCheckc1">Remember me</label>
-                </div>
-                <a href=""><h5 class="text-secondary">Lupa Password?</h5></a>
-              </div>
-              <div class="d-grid mt-4">
-                <button type="button" class="btn btn-secondary p-2">Sign Up</button>
-              </div>
+              <!-- Form -->
+               <form action="<?= base_url('app/sign_in') ?>" method="post">
+                 <div class="form-floating mb-3">
+                   <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" />
+                   <label for="email">Email Address</label>
+                  </div>
+                  <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="password" name="password" placeholder="Email Address / Username" />
+                    <label for="password">Password</label>
+                  </div>
+                  <div class="d-flex mt-1 justify-content-between">
+                    <div class="form-check">
+                      <input class="form-check-input input-primary" type="checkbox" id="customCheckc1" checked="" />
+                      <label class="form-check-label text-muted" for="customCheckc1">Remember me</label>
+                    </div>
+                    <a href=""><h5 class="text-secondary">Lupa Password?</h5></a>
+                  </div>
+                  <div class="d-grid mt-4">
+                    <button type="Submit" class="btn btn-secondary p-2">Masuk</button>
+                  </div>
+                </form>
               <hr />
               <h5 class="d-flex justify-content-center">Belum punya akun?<a href="<?= base_url('app/sign_up') ?>" class="ms-1">Daftar</a></h5>
             </div>

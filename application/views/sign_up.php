@@ -53,24 +53,28 @@
               <form action="<?= base_url('app/sign_up') ?>" method="post">
 
                 <div class="form-floating mb-3">
-                  <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" />
+                  <input type="email" class="form-control" id="email" name="email" value="<?= set_value('email') ?>" placeholder="Email Address" />
                   <label for="email">Email Address</label>
+                  <?= form_error('email','<small class="text-danger">','</small>') ?>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="password" name="password" placeholder="Email Address / Username" />
+                  <input type="text" class="form-control" id="password" name="password" value="<?= set_value('password') ?>" placeholder="Email Address / Username" />
                   <label for="password">Password</label>
+                  <?= form_error('password','<small class="text-danger">','</small>') ?>
                 </div>
                 <div class="form-floating mb-3">
-                  <input type="text" class="form-control" id="confirm_password" name="confirm_password" placeholder="Email Address / Username" />
+                  <input type="text" class="form-control" id="confirm_password" name="confirm_password" value="<?= set_value('confirm_password') ?>" placeholder="Email Address / Username" />
                   <label for="confirm_password">Konfirmasi Password</label>
+                  <?= form_error('confirm_password','<small class="text-danger">','</small>') ?>
                 </div>
                 <div class="form-floating mb-3">
-                  <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
-                    <option selected>Pilih jenis akun</option>
-                    <option value="1">Pembeli</option>
-                    <option value="2">Penjual</option>
+                  <select class="form-select" id="jenis_akun" name="role" aria-label="Floating label select example">
+                    <option selected value="">Pilih jenis akun</option>
+                    <option value="customer">Pembeli</option>
+                    <option value="seller">Penjual</option>
                   </select>
-                  <label for="floatingSelect">Daftar akun sebagai</label>
+                  <label for="jenis_akun">Daftar akun sebagai</label>
+                  <?= form_error('role','<small class="text-danger">','</small>') ?>
                 </div>
                 <div class="d-flex mt-1 justify-content-between">
                   <div class="form-check">

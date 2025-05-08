@@ -6,6 +6,7 @@ class App extends CI_Controller {
     public function __construct() 
     {
         parent::__construct();
+        $this->load->model('Account_model');
         $this->load->model('Seller_model');
         $this->load->model('Customer_model');
         $this->load->helper(['form', 'url']);
@@ -38,25 +39,29 @@ class App extends CI_Controller {
                 $email = $this->input->post('email', TRUE);
                 $password = $this->input->post('password', TRUE);
 
-                $user = $this->db->get_where('account', ['email' => $email])->row();
+                $account = $this->Account_model->sign_in($email,$password);
+                // var_dump($account);
+                // exit;
     
-                if ($user && password_verify($password, $user->password)) {
+                if ($account) {
 
                     $this->session->set_userdata([
-                        'user_id' => $user->id_account, 
-                        'email' => $user->email, 
-                        'role' => $user->role,
+                        'account_id' => $account->id_account, 
+                        'email' => $account->email, 
+                        'role' => $account->role,
                         'sign_in' => true
                     ]);
 
                     $this->session->set_flashdata('message', 'Login berhasil!');
                     
-                    if($user->role === "seller") {
+                    if($account->role === "seller") {
 
+                        $this->session->set_userdata('seller_id', $account->id_seller);
                         redirect('seller');
-            
-                    }elseif($user->role === "customer") {
-            
+                        
+                    }elseif($account->role === "customer") {
+                        
+                        $this->session->set_userdata('customer_id', $account->id_customer);
                         redirect('customer');
             
                     }else {
@@ -172,7 +177,7 @@ class App extends CI_Controller {
             }
         }
 
-        $account_id = $this->session->userdata('user_id');
+        $account_id = $this->session->userdata('account_id');
 
         $data = [
             'account_id'       => $account_id,
@@ -193,7 +198,7 @@ class App extends CI_Controller {
         $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim');
         $this->form_validation->set_rules('no_hp', 'Nomor WhatsApp', 'required|trim');
 
-        $account_id = $this->session->userdata('user_id');
+        $account_id = $this->session->userdata('account_id');
         $data = [
             'account_id' => $account_id,
             'nama'       => $this->input->post('nama'),

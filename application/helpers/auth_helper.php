@@ -26,11 +26,11 @@ function is_role($role) {
 
 function check_profile() {
     $CI =& get_instance();
-    $user_id = $CI->session->userdata("user_id");
+    $account_id = $CI->session->userdata("account_id");
     if($CI->session->userdata('role') === 'seller'){
         $CI->load->model('Seller_model');
     
-        $profile = $CI->Seller_model->get_by_account_id($user_id);
+        $profile = $CI->Seller_model->get_by_account_id($account_id);
     
         if (!$profile) {
             redirect('app/seller_form');
@@ -39,7 +39,7 @@ function check_profile() {
     }elseif ($CI->session->userdata('role') === 'customer'){
         $CI->load->model('Customer_model');
 
-        $profile = $CI->Customer_model->get_by_account_id($user_id);
+        $profile = $CI->Customer_model->get_by_account_id($account_id);
     
         if (!$profile) {
             redirect('app/customer_form');

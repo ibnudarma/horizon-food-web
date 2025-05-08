@@ -37,4 +37,7 @@
     <!-- Apex Chart -->
     <script src="<?= base_url() ?>assets/js/plugins/apexcharts.min.js"></script>
     <script src="<?= base_url() ?>assets/js/pages/dashboard-default.js"></script>
+    <script src="<?= base_url() ?>assets/js/DataTables/datatables.min.js"></script>
+    <script src="<?= base_url() ?>assets/js/DataTables/datatablesbundleb5"></script>
+    <script src="<?= base_url() ?>assets/js/DataTables/datatablesb5"></script>
     <!-- [Page Specific JS] end -->

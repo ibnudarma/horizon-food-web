@@ -12,6 +12,7 @@
         <i class="ti ti-menu-2"></i>
       </a>
     </li>
+    <?php if(check_role('customer')) : ?>
     <li class="dropdown pc-h-item d-inline-flex d-md-none">
       <a
         class="pc-head-link head-link-secondary dropdown-toggle arrow-none m-0"
@@ -27,7 +28,7 @@
         <form class="px-3">
           <div class="mb-0 d-flex align-items-center">
             <i data-feather="search"></i>
-            <input type="search" class="form-control border-0 shadow-none" placeholder="Search here. . ." />
+            <input type="search" class="form-control border-0 shadow-none" placeholder="Mau makan apa hari ini?" />
           </div>
         </form>
       </div>
@@ -39,6 +40,7 @@
         <button class="btn btn-light-secondary btn-search"><i class="ti ti-adjustments-horizontal"></i></button>
       </form>
     </li>
+    <?php endif ?>
   </ul>
 </div>
 <!-- [Mobile Media Block end] -->

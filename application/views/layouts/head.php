@@ -25,5 +25,7 @@
     <!-- [Template CSS Files] -->
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/style.css" id="main-style-link" />
     <link rel="stylesheet" href="<?= base_url() ?>assets/css/style-preset.css" />
+    <link rel="stylesheet" href="<?= base_url() ?>assets/js/DataTables/datatables.min.css" />
+    <script src="<?= base_url('assets/js/jquery.js')?>"></script>
 
 </head>

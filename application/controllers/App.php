@@ -16,7 +16,11 @@ class App extends CI_Controller {
     public function sign_in()
     {
         if ($this->input->method() === 'get') {
-            $this->load->view('sign_in');
+            if(check_sign_in() == true) {
+                redirect('app/dashboard');
+            }else{
+                $this->load->view('sign_in');
+            }
         } else {
 
             $this->form_validation->set_rules('email', 'Email', 'required|trim|valid_email');
@@ -30,8 +34,12 @@ class App extends CI_Controller {
     
                 if ($user && password_verify($password, $user->password)) {
 
-                    $this->session->set_userdata(['user_id' => $user->id, 'email' => $user->email, 'role' => $user->role]);
-
+                    $this->session->set_userdata([
+                        'user_id' => $user->id, 
+                        'email' => $user->email, 
+                        'role' => $user->role,
+                        'sign_in' => true
+                    ]);
                     $this->session->set_flashdata('message', 'Login berhasil!');
                     redirect('app/dashboard');
                 } else {
@@ -86,7 +94,7 @@ class App extends CI_Controller {
     public function logout()
     {
     // Hapus semua data session
-    $this->session->unset_userdata(['user_id', 'email', 'role']);
+    $this->session->unset_userdata(['user_id', 'email', 'role','sign_in']);
     $this->session->sess_destroy();
 
     // Set flashdata untuk notifikasi
@@ -98,11 +106,18 @@ class App extends CI_Controller {
 
     public function dashboard()
     {
-        $data['title'] = 'Dashboard';
-        $data['content'] = 'dashboard_seller';
+        if(check_role('seller')) {
 
-        $this->load->view('template', $data);
+            redirect('seller');
+
+        }elseif(check_role('customer')) {
+
+            redirect('customer');
+
+        }else {
+            
+            redirect('app/sign_in');
+        }
     }
-
 
 }

@@ -92,7 +92,10 @@ class App extends CI_Controller {
 
     public function dashboard()
     {
-        $this->load->view('dashboard');
+        $data['title'] = 'Dashboard';
+        $data['content'] = 'dashboard';
+
+        $this->load->view('template', $data);
     }
 
 }

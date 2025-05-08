@@ -29,6 +29,8 @@ class Customer extends CI_Controller {
     {
         $data['title'] = 'Profile';
         $data['content'] = 'customer_profile';
+        $data['customer'] = $this->Customer_model->get_by_account_id($this->session->userdata('user_id'));
+
         $this->load->view('template', $data);
     }
 

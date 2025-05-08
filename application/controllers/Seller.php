@@ -29,6 +29,8 @@ class Seller extends CI_Controller {
     {
         $data['title'] = 'Profile';
         $data['content'] = 'seller_profile';
+        $data['seller'] = $this->Seller_model->get_by_account_id($this->session->userdata('user_id'));
+        
         $this->load->view('template', $data);
     }
 

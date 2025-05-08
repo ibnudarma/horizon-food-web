@@ -7,14 +7,15 @@ class Produk extends CI_Controller {
     {
         parent::__construct();
         require_sign_in();
+        is_role('seller');
+        check_profile();
     }
 
     public function index()
     {
-        is_role('seller');
 
         $data['title'] = 'Produk';
-        $data['content'] = 'produk_seller';
+        $data['content'] = 'seller_produk';
 
         $this->load->view('template', $data);
     }

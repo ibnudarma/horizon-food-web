@@ -17,7 +17,11 @@ class App extends CI_Controller {
     {
         if ($this->input->method() === 'get') {
             if(check_sign_in() == true) {
-                redirect('app/dashboard');
+                if(check_role('seller')){
+                    redirect('seller');
+                }elseif(check_role('customer')){
+                    redirect('customer');
+                }
             }else{
                 $this->load->view('sign_in');
             }
@@ -35,13 +39,27 @@ class App extends CI_Controller {
                 if ($user && password_verify($password, $user->password)) {
 
                     $this->session->set_userdata([
-                        'user_id' => $user->id, 
+                        'user_id' => $user->id_account, 
                         'email' => $user->email, 
                         'role' => $user->role,
                         'sign_in' => true
                     ]);
+
                     $this->session->set_flashdata('message', 'Login berhasil!');
-                    redirect('app/dashboard');
+                    
+                    if($user->role === "seller") {
+
+                        redirect('seller');
+            
+                    }elseif($user->role === "customer") {
+            
+                        redirect('customer');
+            
+                    }else {
+                        
+                        redirect('app/sign_in');
+                    }
+
                 } else {
 
                     $this->session->set_flashdata('error', 'Masukkan email atau password yang valid!');
@@ -83,6 +101,7 @@ class App extends CI_Controller {
                 $this->db->insert('account', $data);
 
                 $this->session->set_flashdata('success', 'Selamat pendaftaran berhasil! silahkan masuk');
+
                 redirect('app/sign_in');
             } else {
                 
@@ -104,19 +123,84 @@ class App extends CI_Controller {
     redirect('app/sign_in');
     }
 
-    public function dashboard()
+    public function seller_form()
     {
-        if(check_role('seller')) {
+        $data['title'] = 'Profile';
+        $data['content'] = 'form_seller';
+        
+        $this->load->view('template', $data);
+    }
 
-            redirect('seller');
+    public function customer_form()
+    {
+        $data['title'] = 'Profile';
+        $data['content'] = 'form_customer';
+        
+        $this->load->view('template', $data);
+    }
 
-        }elseif(check_role('customer')) {
+    public function seller_add() {
+        $this->load->model('Seller_model');
+        $this->load->helper(['form', 'url']);
+        $this->load->library(['form_validation', 'upload']);
+    
+        $user_id = $this->session->userdata('user_id');
+    
+        // Aturan validasi form
+        $this->form_validation->set_rules('nama_kantin', 'Nama Kantin', 'required');
+        $this->form_validation->set_rules('nama', 'Nama Pemilik Kantin', 'required');
+        $this->form_validation->set_rules('deskripsi_kantin', 'Deskripsi Kantin', 'required');
+    
+        if ($this->form_validation->run() == FALSE) {
+            $this->session->set_flashdata('error', validation_errors());
+            redirect('seller'); // atau sesuaikan dengan halaman form kamu
+        }
+    
+        // Konfigurasi upload
+        $config['upload_path']   = './uploads/seller_logo/';
+        $config['allowed_types'] = 'jpg|jpeg|png|gif';
+        $config['max_size']      = 2048;
+        $config['file_name']     = 'logo_' . time();
+    
+        $this->upload->initialize($config);
+    
+        $logo = null;
+        if (!empty($_FILES['logo_kantin']['name'])) {
+            if ($this->upload->do_upload('logo_kantin')) {
+                $upload_data = $this->upload->data();
+                $logo = $upload_data['file_name'];
+            } else {
+                $this->session->set_flashdata('error', $this->upload->display_errors());
+                redirect('seller');
+            }
+        }
+    
+        // Simpan ke database
+        $data = [
+            'account_id'       => $user_id,
+            'nama_kantin'      => $this->input->post('nama_kantin'),
+            'nama'             => $this->input->post('nama'),
+            'deskripsi_kantin' => $this->input->post('deskripsi_kantin'),
+            'logo_kantin'      => $logo
+        ];
+    
+        $this->Seller_model->insert($data);
+    
+        $this->session->set_flashdata('success', 'Profil berhasil dilengkapi.');
+        redirect('seller'); // ubah ke halaman yang sesuai
+    }
 
-            redirect('customer');
+    public function customer_add()
+    {
 
-        }else {
-            
-            redirect('app/sign_in');
+    }
+
+    public function profile()
+    {
+        if(check_role('seller')){
+            redirect('seller/profile');
+        }elseif (check_role('customer')){
+            redirect('customer/profile');
         }
     }
 

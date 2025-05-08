@@ -1,4 +1,4 @@
-<footer class="pc-footer">
+<footer class="pc-footer p-0">
     <div class="footer-wrapper container-fluid">
     <div class="row">
         <div class="col-sm-6 my-1">

@@ -8,18 +8,28 @@ class Customer extends CI_Controller {
         parent::__construct();
         require_sign_in();
         is_role('customer');
+        check_profile();
+        $this->load->model('Customer_model');
     }
 
     public function index()
     {
-        return redirect('customer/dashboard');
+        return redirect('customer/home');
     }
 
-    public function dashboard()
+    public function home()
     {
-        $data['title'] = 'Dashboard';
-        $data['content'] = 'dashboard_customer';
+        $data['title'] = 'Home';
+        $data['content'] = 'customer_home';
 
         $this->load->view('template', $data);
     }
+
+    public function profile()
+    {
+        $data['title'] = 'Profile';
+        $data['content'] = 'customer_profile';
+        $this->load->view('template', $data);
+    }
+
 }

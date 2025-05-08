@@ -8,6 +8,8 @@ class Seller extends CI_Controller {
         parent::__construct();
         require_sign_in();
         is_role('seller');
+        check_profile();
+        $this->load->model('Seller_model');
     }
 
     public function index()
@@ -18,8 +20,15 @@ class Seller extends CI_Controller {
     public function dashboard()
     {
         $data['title'] = 'Dashboard';
-        $data['content'] = 'dashboard_seller';
+        $data['content'] = 'seller_dashboard';
 
+        $this->load->view('template', $data);
+    }
+
+    public function profile()
+    {
+        $data['title'] = 'Profile';
+        $data['content'] = 'seller_profile';
         $this->load->view('template', $data);
     }
 

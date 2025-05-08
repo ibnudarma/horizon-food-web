@@ -115,11 +115,6 @@
       </a>
       <div class="dropdown-menu dropdown-user-profile dropdown-menu-end pc-h-dropdown">
         <div class="dropdown-header">
-          <h4>
-            Good Morning,
-            <span class="small text-muted">John Doe</span>
-          </h4>
-            <hr />
             <a href="<?= base_url('#') ?>" class="dropdown-item">
               <i class="ti ti-user"></i>
               <span>My Profile</span>
@@ -128,7 +123,7 @@
               <i class="ti ti-settings"></i>
               <span>Account Settings</span>
             </a>
-            <a href="<?= base_url('#') ?>" class="dropdown-item">
+            <a href="<?= base_url('app/logout') ?>" class="dropdown-item">
               <i class="ti ti-logout"></i>
               <span>Logout</span>
             </a>

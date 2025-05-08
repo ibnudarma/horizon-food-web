@@ -52,7 +52,7 @@
                   </div>
               <?php endif; ?>
               <!-- End Notifikasi -->
-              <a href="<?= base_url('/') ?>" class="d-flex justify-content-center mt-3">
+              <a href="<?= base_url() ?>" class="d-flex justify-content-center mt-3">
                 <img src="<?= base_url('assets/images/logo-dark.svg') ?>" alt="image" class="img-fluid brand-logo" />
               </a>
               <div class="row">

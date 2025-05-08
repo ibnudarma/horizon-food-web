@@ -9,5 +9,4 @@ class Seller_model extends CI_Model {
         return $this->db->insert('seller', $data);
     }
     
-
 }

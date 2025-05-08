@@ -30,7 +30,7 @@
   <!-- [ Main Content ] end -->
 
   <!-- [ Footer Content ] start -->
-    <?php include('layouts/footer.php') ?>
+
   <!-- [ Footer Content ] end -->
 
   <!-- Required Js -->

@@ -4,7 +4,7 @@
     <div class="row align-items-center">
       <div class="col">
         <div class="page-header-title">
-          <h5 class="m-b-10">Data Produk</h5>
+          <h5 class="m-b-10">Data Menu</h5>
         </div>
       </div>
       <div class="col-auto">

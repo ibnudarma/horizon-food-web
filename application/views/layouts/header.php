@@ -35,7 +35,7 @@
     <li class="pc-h-item d-none d-md-inline-flex">
       <form class="header-search">
         <i data-feather="search" class="icon-search"></i>
-        <input type="search" class="form-control" placeholder="Search here. . ." />
+        <input type="search" class="form-control" placeholder="Mau makan apa hari ini?" />
         <button class="btn btn-light-secondary btn-search"><i class="ti ti-adjustments-horizontal"></i></button>
       </form>
     </li>

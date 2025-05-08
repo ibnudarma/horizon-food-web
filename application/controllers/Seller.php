@@ -32,4 +32,20 @@ class Seller extends CI_Controller {
         $this->load->view('template', $data);
     }
 
+    public function menu()
+    {
+        $data['title'] = 'Produk';
+        $data['content'] = 'seller_menu';
+
+        $this->load->view('template', $data);
+    }
+
+    public function pesanan()
+    {
+        $data['title'] = 'Pesanan';
+        $data['content'] = 'seller_pesanan';
+
+        $this->load->view('template', $data);
+    }
+
 }

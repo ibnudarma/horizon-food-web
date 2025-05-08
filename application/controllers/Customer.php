@@ -14,13 +14,13 @@ class Customer extends CI_Controller {
 
     public function index()
     {
-        return redirect('customer/home');
+        return redirect('customer/menu');
     }
 
-    public function home()
+    public function menu()
     {
-        $data['title'] = 'Home';
-        $data['content'] = 'customer_home';
+        $data['title'] = 'Menu';
+        $data['content'] = 'customer_menu';
 
         $this->load->view('template', $data);
     }
@@ -29,6 +29,27 @@ class Customer extends CI_Controller {
     {
         $data['title'] = 'Profile';
         $data['content'] = 'customer_profile';
+        $this->load->view('template', $data);
+    }
+
+    public function kantin()
+    {
+        $data['title'] = 'Kantin';
+        $data['content'] = 'customer_kantin';
+        $this->load->view('template', $data);
+    }
+
+    public function keranjang()
+    {
+        $data['title'] = 'Keranjang';
+        $data['content'] = 'customer_keranjang';
+        $this->load->view('template', $data);
+    }
+
+    public function pesanan()
+    {
+        $data['title'] = 'Pesanan';
+        $data['content'] = 'customer_pesanan';
         $this->load->view('template', $data);
     }
 

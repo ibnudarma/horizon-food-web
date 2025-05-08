@@ -16,34 +16,34 @@
         </li>
 
         <li class="pc-item">
-          <a href="<?= base_url('produk') ?>" class="pc-link"
-            ><span class="pc-micon"><i class="ti ti-outlet"></i></span><span class="pc-mtext">Produk</span></a>
+          <a href="<?= base_url('seller/menu') ?>" class="pc-link"
+            ><span class="pc-micon"><i class="ti ti-outlet"></i></span><span class="pc-mtext">Menu</span></a>
         </li>
 
         <li class="pc-item">
-          <a href="<?= base_url('pesanan') ?>" class="pc-link"
+          <a href="<?= base_url('seller/pesanan') ?>" class="pc-link"
             ><span class="pc-micon"><i class="ti ti-receipt"></i></span><span class="pc-mtext">Pesanan</span></a>
         </li>
         <?php endif ?>
 
         <?php if(check_role('customer')) : ?>
         <li class="pc-item">
-        <a href="<?= base_url('customer/home') ?>" class="pc-link"
-          ><span class="pc-micon"><i class="ti ti-home"></i></span><span class="pc-mtext">Home</span></a>
+        <a href="<?= base_url('customer/menu') ?>" class="pc-link"
+          ><span class="pc-micon"><i class="ti ti-menu"></i></span><span class="pc-mtext">Menu</span></a>
         </li>
 
         <li class="pc-item">
-          <a href="<?= base_url('#') ?>" class="pc-link"
+          <a href="<?= base_url('customer/kantin') ?>" class="pc-link"
             ><span class="pc-micon"><i class="ti ti-outlet"></i></span><span class="pc-mtext">Kantin</span></a>
         </li>
 
         <li class="pc-item">
-          <a href="<?= base_url('#') ?>" class="pc-link"
+          <a href="<?= base_url('customer/keranjang') ?>" class="pc-link"
             ><span class="pc-micon"><i class="ti ti-shopping-cart"></i></span><span class="pc-mtext">Keranjang</span></a>
         </li>
 
         <li class="pc-item">
-          <a href="<?= base_url('#') ?>" class="pc-link"
+          <a href="<?= base_url('customer/pesanan') ?>" class="pc-link"
             ><span class="pc-micon"><i class="ti ti-receipt"></i></span><span class="pc-mtext">Pesanan</span></a>
         </li>
         <?php endif ?>

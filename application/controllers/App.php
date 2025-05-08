@@ -6,6 +6,10 @@ class App extends CI_Controller {
     public function __construct() 
     {
         parent::__construct();
+        $this->load->model('Seller_model');
+        $this->load->model('Customer_model');
+        $this->load->helper(['form', 'url']);
+        $this->load->library(['form_validation', 'upload']);
     }
 
     public function index()
@@ -140,13 +144,7 @@ class App extends CI_Controller {
     }
 
     public function seller_add() {
-        $this->load->model('Seller_model');
-        $this->load->helper(['form', 'url']);
-        $this->load->library(['form_validation', 'upload']);
     
-        $user_id = $this->session->userdata('user_id');
-    
-        // Aturan validasi form
         $this->form_validation->set_rules('nama_kantin', 'Nama Kantin', 'required');
         $this->form_validation->set_rules('nama', 'Nama Pemilik Kantin', 'required');
         $this->form_validation->set_rules('deskripsi_kantin', 'Deskripsi Kantin', 'required');
@@ -156,7 +154,6 @@ class App extends CI_Controller {
             redirect('seller'); // atau sesuaikan dengan halaman form kamu
         }
     
-        // Konfigurasi upload
         $config['upload_path']   = './uploads/seller_logo/';
         $config['allowed_types'] = 'jpg|jpeg|png|gif';
         $config['max_size']      = 2048;
@@ -174,10 +171,11 @@ class App extends CI_Controller {
                 redirect('seller');
             }
         }
-    
-        // Simpan ke database
+
+        $account_id = $this->session->userdata('user_id');
+
         $data = [
-            'account_id'       => $user_id,
+            'account_id'       => $account_id,
             'nama_kantin'      => $this->input->post('nama_kantin'),
             'nama'             => $this->input->post('nama'),
             'deskripsi_kantin' => $this->input->post('deskripsi_kantin'),
@@ -187,12 +185,26 @@ class App extends CI_Controller {
         $this->Seller_model->insert($data);
     
         $this->session->set_flashdata('success', 'Profil berhasil dilengkapi.');
-        redirect('seller'); // ubah ke halaman yang sesuai
+        redirect('seller');
     }
 
     public function customer_add()
     {
+        $this->form_validation->set_rules('nama', 'Nama Lengkap', 'required|trim');
+        $this->form_validation->set_rules('no_hp', 'Nomor WhatsApp', 'required|trim');
 
+        $account_id = $this->session->userdata('user_id');
+        $data = [
+            'account_id' => $account_id,
+            'nama'       => $this->input->post('nama'),
+            'no_hp'      => $this->input->post('no_hp')
+        ];
+
+        $this->Customer_model->insert($data);
+    
+        $this->session->set_flashdata('success', 'Profil berhasil dilengkapi.');
+        redirect('customer');
+        
     }
 
     public function profile()

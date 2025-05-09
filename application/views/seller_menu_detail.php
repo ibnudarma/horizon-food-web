@@ -24,6 +24,11 @@
         <div class="card-body">
         <form action="<?= base_url('seller/menu_add') ?>" method="post" enctype="multipart/form-data">
         <div class="row mb-3">
+            <div class="col-md-3">
+            <img src="<?= base_url('uploads/menu/') . (!empty($menu->gambar) ? $menu->gambar : 'default.jpg') ?>" class="img-thumb" alt="Gambar Menu" width="120px">
+            </div>
+        </div>
+        <div class="row mb-3">
             <label for="nama_menu" class="col-sm-2 col-form-label">Nama Menu</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="nama_menu" name="nama_menu" value="<?= $menu->nama_menu ?>" autocomplete="off">
@@ -55,7 +60,8 @@
             </div>
         </div>
             <button class="btn btn-success" type="button">Simpan Perubahan</button>
-        </form>
+            <a href="<?= base_url('seller/menu_delete/') ?><?=$menu->id_menu?>" class="btn btn-danger" >Hapus Menu</a>
+          </form>
         </div>
     </div>
     </div>

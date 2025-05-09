@@ -112,6 +112,13 @@ class Seller extends CI_Controller {
         $this->load->view('template', $data);
     }
 
+    public function menu_delete($id_menu)
+    {
+        $this->Menu_model->delete($id_menu);
+        $this->session->set_flashdata('notif_menu_delete','Berhasil hapus menu');
+        redirect('seller/menu');
+    }
+
     public function pesanan()
     {
         $data['title'] = 'Pesanan';

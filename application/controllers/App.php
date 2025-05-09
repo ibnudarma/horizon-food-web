@@ -188,6 +188,10 @@ class App extends CI_Controller {
         ];
     
         $this->Seller_model->insert($data);
+
+        $seller_id = $this->db->insert_id();
+
+        $this->session->set_userdata('seller_id', $seller_id);
     
         $this->session->set_flashdata('success', 'Profil berhasil dilengkapi.');
         redirect('seller');
@@ -206,6 +210,10 @@ class App extends CI_Controller {
         ];
 
         $this->Customer_model->insert($data);
+
+        $customer_id = $this->db->insert_id();
+
+        $this->session->set_userdata('customer_id', $customer_id);
     
         $this->session->set_flashdata('success', 'Profil berhasil dilengkapi.');
         redirect('customer');

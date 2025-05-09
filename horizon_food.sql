@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: May 07, 2025 at 07:51 AM
+-- Generation Time: May 09, 2025 at 10:49 AM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -34,14 +34,6 @@ CREATE TABLE `account` (
   `role` enum('customer','seller') COLLATE utf8mb4_general_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `account`
---
-
-INSERT INTO `account` (`id_account`, `email`, `password`, `role`, `created_at`) VALUES
-('d6a3af1d-2074-11f0-9a08-3822e22e3cc1', 'seller@example.com', 'horizonfood', 'seller', '2025-04-23 18:57:43'),
-('eda30ad6-2074-11f0-9a08-3822e22e3cc1', 'customer@example.com', 'horizonfood', 'customer', '2025-04-23 18:58:22');
 
 -- --------------------------------------------------------
 
@@ -77,13 +69,6 @@ CREATE TABLE `customer` (
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Dumping data for table `customer`
---
-
-INSERT INTO `customer` (`id_customer`, `account_id`, `nama`, `no_hp`, `created_at`) VALUES
-(1, 'eda30ad6-2074-11f0-9a08-3822e22e3cc1', 'Adnan Fauzi', '+6281213042914', '2025-04-23 19:21:20');
-
 -- --------------------------------------------------------
 
 --
@@ -91,18 +76,13 @@ INSERT INTO `customer` (`id_customer`, `account_id`, `nama`, `no_hp`, `created_a
 --
 
 CREATE TABLE `keranjang` (
+  `id_keranjang` int NOT NULL,
   `customer_id` int NOT NULL,
   `menu_id` int NOT NULL,
-  `jumlah` int NOT NULL
+  `jumlah` int NOT NULL,
+  `catatan` text COLLATE utf8mb4_general_ci,
+  `seller_id` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `keranjang`
---
-
-INSERT INTO `keranjang` (`customer_id`, `menu_id`, `jumlah`) VALUES
-(1, 1, 2),
-(1, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -115,19 +95,12 @@ CREATE TABLE `menu` (
   `seller_id` int NOT NULL,
   `nama_menu` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `harga` int NOT NULL,
+  `deskripsi_menu` text COLLATE utf8mb4_general_ci,
   `category_id` int NOT NULL,
   `gambar` varchar(100) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `tersedia` tinyint(1) NOT NULL DEFAULT '1',
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `menu`
---
-
-INSERT INTO `menu` (`id_menu`, `seller_id`, `nama_menu`, `harga`, `category_id`, `gambar`, `tersedia`, `created_at`) VALUES
-(1, 1, 'Nasi Goreng', 12000, 1, NULL, 1, '2025-04-23 19:36:20'),
-(2, 1, 'Es Teh Manis', 5000, 2, NULL, 1, '2025-04-23 19:36:20');
 
 -- --------------------------------------------------------
 
@@ -151,40 +124,23 @@ CREATE TABLE `pesanan` (
   `id_pesanan` int NOT NULL,
   `customer_id` int NOT NULL,
   `seller_id` int NOT NULL,
-  `status` enum('pending','diproses','selesai','dibatalkan') COLLATE utf8mb4_general_ci DEFAULT 'pending',
+  `status` enum('diproses','selesai') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT 'diproses',
   `total` int NOT NULL,
-  `catatan` text COLLATE utf8mb4_general_ci,
   `waktu_pesanan` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `pesanan`
---
-
-INSERT INTO `pesanan` (`id_pesanan`, `customer_id`, `seller_id`, `status`, `total`, `catatan`, `waktu_pesanan`) VALUES
-(1, 1, 1, 'pending', 34000, 'nasi goreng pedes sedeng dan es teh manis di pisah es nya', '2025-04-23 21:49:01');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `pesanan_menu`
+-- Table structure for table `pesanan_detail`
 --
 
-CREATE TABLE `pesanan_menu` (
+CREATE TABLE `pesanan_detail` (
   `pesanan_id` int NOT NULL,
   `menu_id` int NOT NULL,
-  `nama_menu` varchar(100) COLLATE utf8mb4_general_ci NOT NULL,
-  `harga_menu` int NOT NULL,
-  `jumlah` int NOT NULL
+  `jumlah` int NOT NULL,
+  `catatan` text COLLATE utf8mb4_general_ci
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `pesanan_menu`
---
-
-INSERT INTO `pesanan_menu` (`pesanan_id`, `menu_id`, `nama_menu`, `harga_menu`, `jumlah`) VALUES
-(1, 1, 'Nasi Goreng', 12000, 2),
-(1, 2, 'Es Teh Manis', 5000, 2);
 
 -- --------------------------------------------------------
 
@@ -201,13 +157,6 @@ CREATE TABLE `seller` (
   `deskripsi_kantin` text COLLATE utf8mb4_general_ci,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `seller`
---
-
-INSERT INTO `seller` (`id_seller`, `account_id`, `nama`, `nama_kantin`, `logo_kantin`, `deskripsi_kantin`, `created_at`) VALUES
-(1, 'd6a3af1d-2074-11f0-9a08-3822e22e3cc1', 'DEDIH', 'KANTIN KOSWARA', NULL, NULL, '2025-04-23 19:17:42');
 
 --
 -- Indexes for dumped tables
@@ -237,6 +186,7 @@ ALTER TABLE `customer`
 -- Indexes for table `keranjang`
 --
 ALTER TABLE `keranjang`
+  ADD PRIMARY KEY (`id_keranjang`),
   ADD KEY `customer_id` (`customer_id`),
   ADD KEY `menu_id` (`menu_id`);
 
@@ -263,9 +213,9 @@ ALTER TABLE `pesanan`
   ADD KEY `fk_pesanan_seller` (`seller_id`);
 
 --
--- Indexes for table `pesanan_menu`
+-- Indexes for table `pesanan_detail`
 --
-ALTER TABLE `pesanan_menu`
+ALTER TABLE `pesanan_detail`
   ADD PRIMARY KEY (`pesanan_id`,`menu_id`),
   ADD KEY `menu_id` (`menu_id`);
 
@@ -290,25 +240,31 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id_customer` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_customer` int NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `keranjang`
+--
+ALTER TABLE `keranjang`
+  MODIFY `id_keranjang` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `menu`
 --
 ALTER TABLE `menu`
-  MODIFY `id_menu` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_menu` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `pesanan`
 --
 ALTER TABLE `pesanan`
-  MODIFY `id_pesanan` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pesanan` int NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `seller`
 --
 ALTER TABLE `seller`
-  MODIFY `id_seller` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_seller` int NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -347,11 +303,11 @@ ALTER TABLE `pesanan`
   ADD CONSTRAINT `fk_pesanan_seller` FOREIGN KEY (`seller_id`) REFERENCES `seller` (`id_seller`) ON DELETE CASCADE;
 
 --
--- Constraints for table `pesanan_menu`
+-- Constraints for table `pesanan_detail`
 --
-ALTER TABLE `pesanan_menu`
-  ADD CONSTRAINT `pesanan_menu_ibfk_1` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id_pesanan`),
-  ADD CONSTRAINT `pesanan_menu_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id_menu`);
+ALTER TABLE `pesanan_detail`
+  ADD CONSTRAINT `pesanan_detail_ibfk_1` FOREIGN KEY (`pesanan_id`) REFERENCES `pesanan` (`id_pesanan`),
+  ADD CONSTRAINT `pesanan_detail_ibfk_2` FOREIGN KEY (`menu_id`) REFERENCES `menu` (`id_menu`);
 
 --
 -- Constraints for table `seller`

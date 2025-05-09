@@ -1,6 +1,5 @@
-<!-- [ Main Content ] start -->
+
 <div class="row">
-  <!-- [ sample-page ] start -->
    <?php foreach($menu as $data) :?>
     <div class="col-xl-3 col-md-6 col-6 mb-4">
       <div class="card h-100">
@@ -10,11 +9,10 @@
           <span><?= $data['nama_kategori'] ?></span>
           <p class="card-text"><?= $data['nama_kantin'] ?></p>
           <p class="card-text fw-bold">Rp. <?= $data['harga'] ?></p>
-          <a href="#" class="btn btn-primary w-100">Tambah</a>
+          <a href="<?= base_url('customer/menu_detail/' . $data['id_menu']) ?>" class="btn btn-primary w-100">Pesan</a>
         </div>
       </div>
     </div>
     <?php endforeach ?>
 
   </div>
-  <!-- [ sample-page ] end -->

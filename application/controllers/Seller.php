@@ -12,8 +12,7 @@ class Seller extends CI_Controller {
         $this->load->model('Seller_model');
         $this->load->model('Category_model');
         $this->load->model('Menu_model');
-        $this->load->helper(['form', 'url']);
-        $this->load->library('upload');
+        $this->load->model('Pesanan_model');
     }
 
     public function index()
@@ -33,7 +32,7 @@ class Seller extends CI_Controller {
     {
         $data['title'] = 'Profile';
         $data['content'] = 'seller_profile';
-        $data['seller'] = $this->Seller_model->get_by_account_id($this->session->userdata('user_id'));
+        $data['seller'] = $this->Seller_model->get_by_account_id($this->session->userdata('account_id'));
         
         $this->load->view('template', $data);
     }
@@ -61,6 +60,7 @@ class Seller extends CI_Controller {
 
             $nama_menu = $this->input->post('nama_menu', TRUE);
             $harga = $this->input->post('harga', TRUE);
+            $deskripsi_menu = $this->input->post('deskripsi_menu', TRUE);
             $category_id = $this->input->post('category_id', TRUE);
 
             if (empty($nama_menu) || empty($harga) || empty($category_id)) {
@@ -91,6 +91,7 @@ class Seller extends CI_Controller {
                 'seller_id'     => $this->session->userdata('seller_id'),
                 'nama_menu'     => $nama_menu,
                 'harga'         => $harga,
+                'deskripsi_menu'=> $deskripsi_menu,
                 'category_id'   => $category_id,
                 'gambar'        => $gambar
             ];
@@ -123,8 +124,25 @@ class Seller extends CI_Controller {
     {
         $data['title'] = 'Pesanan';
         $data['content'] = 'seller_pesanan';
+        $data['pesanan'] = $this->Pesanan_model->get_pesanan_by_seller($this->session->userdata('seller_id'));
+  
+        $this->load->view('template', $data);
+    }
+
+    public function pesanan_detail($id_pesanan)
+    {
+        $data['title'] = 'Pesanan';
+        $data['content'] = 'seller_pesanan_detail';
+        $data['pesanan'] = $this->Pesanan_model->get_pesanan_by_id($id_pesanan);
+        $data['pesanan_detail'] = $this->Pesanan_model->get_pesanan_detail($id_pesanan);
 
         $this->load->view('template', $data);
+    }
+
+    public function pesanan_ready($id_pesanan)
+    {
+        $this->Pesanan_model->approve_pesanan($id_pesanan);
+        redirect('seller/pesanan');
     }
 
 }

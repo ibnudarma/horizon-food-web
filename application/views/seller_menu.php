@@ -35,6 +35,7 @@
           <th class="text-center">Gambar</th>
           <th>Nama Menu</th>
           <th>Kategori</th>
+          <th>Deskripsi</th>
           <th>Harga</th>
           <th class="text-center">Aksi</th>
         </tr>
@@ -42,12 +43,13 @@
       <tbody>
         <?php foreach($menu as $item): ?>
         <tr>
-        <td class="text-center"><img src="<?= base_url('uploads/menu/') . (!empty($item->gambar) ? $item->gambar : 'default.jpg') ?>" class="img-thumb" alt="Gambar Menu"></td>
-          <td><?= $item->nama_menu ?></td>
-          <td><?= $item->category ?></td>
-          <td><?= $item->harga ?></td>
+        <td class="text-center"><img src="<?= base_url('uploads/menu/') . (!empty($item['gambar']) ? $item['gambar'] : 'default.jpg') ?>" class="img-thumb" alt="Gambar Menu"></td>
+          <td><?= $item['nama_menu'] ?></td>
+          <td><?= $item['category'] ?></td>
+          <td><?= $item['deskripsi_menu'] ?></td>
+          <td><?= $item['harga'] ?></td>
           <td class="text-center">
-            <a href="<?= base_url('seller/menu_detail/') ?><?= $item->id_menu ?>" class="btn btn-sm btn-primary">detail</a>
+            <a href="<?= base_url('seller/menu_detail/') ?><?= $item['id_menu'] ?>" class="btn btn-sm btn-primary">detail</a>
           </td>
         </tr>
         <?php endforeach ?>

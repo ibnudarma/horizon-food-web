@@ -41,6 +41,12 @@
             </div>
         </div>
         <div class="row mb-3">
+            <label for="deskripsi_menu" class="col-sm-2 col-form-label">Deskripsi</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="deskripsi_menu" name="deskripsi_menu" value="<?= $menu->deskripsi_menu ?>" autocomplete="off">
+            </div>
+        </div>
+        <div class="row mb-3">
             <label for="harga" class="col-sm-2 col-form-label">Kategori</label>
             <div class="col-sm-10">
                 <select name="category_id" class="form-select" aria-label="Default select example">

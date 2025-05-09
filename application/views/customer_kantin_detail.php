@@ -28,11 +28,10 @@
           <h5 class="card-title p-0 m-0"><?= $data['nama_menu'] ?></h5>
           <span><?= $data['category'] ?></span>
           <p class="card-text fw-bold">Rp. <?= $data['harga'] ?></p>
-          <a href="#" class="btn btn-primary w-100">Tambah</a>
+          <a href="<?= base_url('customer/menu_detail/' . $data['id_menu']) ?>" class="btn btn-primary w-100">Pesan</a>
         </div>
       </div>
     </div>
     <?php endforeach ?>
 
   </div>
-  <!-- [ sample-page ] end -->

@@ -23,7 +23,7 @@
 
   <!-- [ Main Content ] start -->
     <div class="pc-container">
-      <div class="pc-content">
+      <div class="pc-content pb-2">
         <?php $this->load->view($content) ?>
       </div>
     </div>

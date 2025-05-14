@@ -2,7 +2,7 @@
   <!-- Tombol kembali -->
   <div class="mb-4">
     <a href="<?= base_url('seller/pesanan') ?>" class="btn btn-danger">
-      &larr; Kembali ke Daftar Pesanan
+     Kembali ke Daftar Pesanan
     </a>
   </div>
 

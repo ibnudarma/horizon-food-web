@@ -4,7 +4,7 @@
     <div class="row align-items-center">
       <div class="col">
         <div class="page-header-title">
-          <a href="<?= base_url('seller/menu') ?>" class="btn btn-danger">Batal</a>
+          <a href="<?= base_url('seller/menu') ?>" class="btn btn-danger">Kembali</a>
         </div>
       </div>
       <div class="col-auto">
@@ -22,7 +22,7 @@
     <div class="col-sm-12">
     <div class="card">
         <div class="card-body">
-        <form action="<?= base_url('seller/menu_add') ?>" method="post" enctype="multipart/form-data">
+        <form action="<?= base_url('seller/menu_update/'.$menu->id_menu) ?>" method="post" enctype="multipart/form-data">
         <div class="row mb-3">
             <div class="col-md-3">
             <img src="<?= base_url('uploads/menu/') . (!empty($menu->gambar) ? $menu->gambar : 'default.jpg') ?>" class="img-thumb" alt="Gambar Menu" width="120px">
@@ -65,7 +65,7 @@
                 <input type="file" class="form-control" id="gambar" name="gambar">
             </div>
         </div>
-            <button class="btn btn-success" type="button">Simpan Perubahan</button>
+            <button class="btn btn-success" type="submit">Simpan Perubahan</button>
             <a href="<?= base_url('seller/menu_delete/') ?><?=$menu->id_menu?>" class="btn btn-danger" >Hapus Menu</a>
           </form>
         </div>
